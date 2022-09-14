@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,6 +10,7 @@ namespace Storing_Documents.Models
 {
     public class Document
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         [DataType(DataType.Date)]
@@ -19,10 +21,12 @@ namespace Storing_Documents.Models
         public DateTime Due_date { get; set; }
 
         //Relation
-        [ForeignKey("Priorities")]
-        public int PriorityId { get; set; }
-        public virtual Priority Priorities  { get; set; }
-        public virtual ICollection<File> Files { get; set; } = new HashSet<File>(); 
+        [ForeignKey("Priority")]
+        public virtual int Priority_Id { get; set; }
+        //[JsonIgnore]
+        public virtual Priority Priority  { get; set; }
+        //[JsonIgnore]
+        public virtual ICollection<File> Files { get; } = new HashSet<File>(); 
 
 
 
