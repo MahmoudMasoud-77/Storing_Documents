@@ -22,7 +22,7 @@ namespace Storing_Documents.Models
         [ForeignKey("Priorities")]
         public int PriorityId { get; set; }
         public virtual Priority Priorities  { get; set; }
-        public virtual List<File> Files { get; set; }
+        public virtual ICollection<File> Files { get; set; } = new HashSet<File>(); 
 
 
 
